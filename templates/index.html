@@ -1,72 +1,32 @@
-<!doctype html>
-{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Odd — Homepage</title>
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Homepage</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-<div class="odd-wrapper">
-<header class="odd-header">
-<h1 class="title">WELCOME TO THE ODD SIDE</h1>
-<p class="subtitle">A homepage that thinks in sideways and smiles at the moon.</p>
-<nav class="odd-nav">
-<a href="#about">About</a>
-<a href="#features">Features</a>
-<a href="#contact">Contact</a>
-</nav>
-</header>
+    <header>
+        <h1>Welcome to My Django Homepage</h1>
+        <p>This page includes CSRF protection.</p>
+    </header>
 
+    <main>
+        <form id="contactForm" method="POST" action="{% url 'submit_form' %}">
+            {% csrf_token %}
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-<main>
-<section id="hero" class="hero">
-<div class="odd-cards">
-<div class="card tilted" data-tilt="-12">Eccentric</div>
-<div class="card" data-tilt="8">Curious</div>
-<div class="card tilted" data-tilt="18">Playful</div>
-</div>
-<button id="surpriseBtn" class="btn">Press for a small oddity</button>
-</section>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
 
+            <button type="submit">Send Message</button>
+        </form>
 
-<section id="about" class="panel">
-<h2>About this place</h2>
-<p>Built for folks who like their UI with a little personality — off-kilter shapes, gentle motion, and tiny surprises.</p>
-</section>
+        <div id="response"></div>
+    </main>
 
-
-<section id="features" class="panel">
-<h2>Features</h2>
-<ul>
-<li>Animated, odd-shaped cards</li>
-<li>Keyboard-friendly fun (press <code>O</code>)</li>
-<li>Small easter-egg in JS</li>
-</ul>
-</section>
-
-
-<section id="contact" class="panel">
-<h2>Contact</h2>
-<form class="contact-form" onsubmit="return false;">
-<input type="text" placeholder="Your name" aria-label="name">
-<input type="email" placeholder="Your email" aria-label="email">
-<textarea placeholder="Say something odd..." aria-label="message"></textarea>
-<button class="btn">Send</button>
-</form>
-</section>
-</main>
-
-
-<footer class="odd-footer">Made with a wink • © {{ now|default:date:"Y" }}</footer>
-
-
-<!-- decorative weirdness -->
-<div id="floating-orb" aria-hidden="true"></div>
-
-
-</div>
-
-
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
 </html>
